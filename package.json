@@ -1,0 +1,23 @@
+{
+  "name": "w2d1-avatar",
+  "version": "1.0.0",
+  "description": "# GitHub Avatar Downloader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nosmohta/w2d1-avatar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nosmohta/w2d1-avatar/issues"
+  },
+  "homepage": "https://github.com/Nosmohta/w2d1-avatar#readme",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
