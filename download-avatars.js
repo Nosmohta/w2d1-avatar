@@ -21,10 +21,13 @@ function getRepoContributors(repoOwner, repoName, cb){
     }
     let contributors = JSON.parse(body);
     let avatarURLs = [];
-    contributors.map( (x) => avatarURLs.push( x.avatar_url));
-    console.log(avatarURLs);
+    contributors = contributors.map( (x) => avatarURLs.push( x.avatar_url))
+    //console.log(avatarURLs)
+    avatarURLs.map( ( x, i) => {
+      //console.log( "avatars[x]:" , x , "i: ", i)
+      downloadImageByURL( x , "./images/avatar" + i + ".jpg");
+    })
   })
-
 }
 
 
@@ -39,11 +42,11 @@ function downloadImageByURL(url, filePath) {
 }
 
 
-downloadImageByURL('https://avatars2.githubusercontent.com/u/43004?v=3', "./images/test.jpg" )
 
 
 
-// getRepoContributors("jquery", "jquery", function(err, result) {
-//   console.log("Errors:", err);
-//   console.log("Result:", result);
-// });
+
+getRepoContributors("jquery", "jquery", function(err, result) {
+  console.log("Errors:", err);
+  console.log("Result:", result);
+});
