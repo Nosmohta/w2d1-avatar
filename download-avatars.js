@@ -2,10 +2,20 @@
  var fs = require( "fs");
 
 
-function getRepoContributors(repoOwner, repoName, cb){
-  var GITHUB_USER = "Nosmohta";
-  var GITHUB_TOKEN = "614ba4b68f00f8095735e872add3368d9072a0cb";
-  var requestURL = 'https://'+ GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/' + repoOwner + '/' + repoName + '/contributors';
+let args = process.argv.slice(2)
+if(!(args[0]&&args[1])) {
+   console.log("Please provide two valid arguments.");
+   console.log("Eg. : node downloaded-avatars.js jquery jquery");
+   return;
+  }
+
+console.log(args);
+
+function getRepoContributors(repoOwner, repoName){
+
+  const GITHUB_USER = "Nosmohta";
+  const GITHUB_TOKEN = "614ba4b68f00f8095735e872add3368d9072a0cb";
+  const requestURL = 'https://'+ GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/' + args[0] + '/' + args[1] + '/contributors';
 
   const requestOptions = {
     url: requestURL,
@@ -22,9 +32,7 @@ function getRepoContributors(repoOwner, repoName, cb){
     let contributors = JSON.parse(body);
     let avatarURLs = [];
     contributors = contributors.map( (x) => avatarURLs.push( x.avatar_url))
-    //console.log(avatarURLs)
     avatarURLs.map( ( x, i) => {
-      //console.log( "avatars[x]:" , x , "i: ", i)
       downloadImageByURL( x , "./images/avatar" + i + ".jpg");
     })
   })
@@ -41,12 +49,6 @@ function downloadImageByURL(url, filePath) {
     .pipe(fs.createWriteStream(filePath));
 }
 
+getRepoContributors(...args);
 
 
-
-
-
-getRepoContributors("jquery", "jquery", function(err, result) {
-  console.log("Errors:", err);
-  console.log("Result:", result);
-});
